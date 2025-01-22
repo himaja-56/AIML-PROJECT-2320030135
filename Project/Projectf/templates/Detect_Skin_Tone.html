@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Tone and Clothing Recommendations</title>
+    <style>
+        body {
+            background-color: rgb(26, 141, 142); /* Teal Blue */
+            color: black;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            flex-direction: column;
+        }
+
+        .title-box {
+            background-color: #FFF5E1; /* Cream color */
+            padding: 20px;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 800px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        h3 {
+            color: #555;
+            font-size: 20px;
+        }
+
+        .button {
+            background-color: #FF6B6B;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            display: inline-block;
+            font-size: 16px;
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #E67E22;
+        }
+
+        .upload-image {
+            max-width: 300px;
+            margin: 20px auto;
+            display: block;
+            border: 3px solid #FF6B6B;
+            border-radius: 10px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin-top: 10px;
+        }
+
+        ul li {
+            margin: 5px 0;
+            font-size: 18px;
+            color: #333; /* Default text color */
+        }
+
+        /* Dynamically set color contrast for recommended colors */
+        .dark-text {
+            color: white; /* Lighter text for dark backgrounds */
+        }
+
+        .container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: auto;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title-box">
+            <h1>Detected Skin Tone: {{ skin_tone }}</h1>
+
+            <!-- Display the uploaded image from the static folder -->
+            <h3>Uploaded Image:</h3>
+            <img src="{{ url_for('static', filename='uploads/' + image_path) }}" alt="Uploaded Image" class="upload-image">
+
+            <h3>Recommended Colors:</h3>
+            <ul>
+                {% for color in recommended_colors %}
+                    <li class="{{ 'dark-text' if color|lower in ['black', 'darkbrown', 'charcoal'] else '' }}">{{ color }}</li>
+                {% endfor %}
+            </ul>
+
+            <!-- Button container to go back or view recommendations -->
+            <div class="button-container">
+                <!-- Button to go back to the home page -->
+                <a href="{{ url_for('home') }}">
+                    <button class="button">Go Back</button>
+                </a>
+
+                <!-- Button to view clothing recommendations -->
+                <form action="{{ url_for('recommendations') }}" method="get" style="display:inline;">
+                    <input type="hidden" name="skin_tone" value="{{ skin_tone }}">
+                    <button type="submit" class="button">View Clothing Recommendations</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

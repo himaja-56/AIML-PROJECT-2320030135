@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clothing Recommendations</title>
+
+    <style>
+        body {
+            background-color: rgb(26, 141, 142); /* Teal Blue */
+            color: black;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            overflow: hidden; /* Prevent scroll on the body */
+            flex-direction: column;
+        }
+
+        .title-box {
+            background-color: #FFF5E1; /* Cream color */
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+            margin-bottom: 20px;
+            box-sizing: border-box;
+            overflow-y: auto; /* Allow scrolling inside the box */
+            height: 80vh; /* Limit the height of the title box */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .recommendations-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-start; /* Align images to the left */
+            gap: 20px;
+            max-width: 800px;
+            padding: 10px;
+            box-sizing: border-box;
+            overflow-x: auto; /* Allow horizontal scrolling if images overflow */
+        }
+
+        .shirt-card {
+            background-color: #FFF5E1; /* Cream color */
+            border-radius: 10px;
+            padding: 10px;
+            text-align: center;
+            width: 150px;
+            box-sizing: border-box;
+        }
+
+        .shirt-card img {
+            width: 100%;
+            height: auto; /* Maintain aspect ratio */
+            border-radius: 5px;
+        }
+
+        .button {
+            background-color: #FF6B6B;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            display: inline-block;
+        }
+
+        .button:hover {
+            background-color: #E67E22;
+        }
+
+        /* Additional space for larger screens */
+        @media screen and (min-width: 1200px) {
+            .title-box {
+                width: 60%;
+            }
+        }
+
+        /* Smooth scrolling for the recommendations container */
+        .recommendations-container {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <div class="title-box">
+        <h1>Recommended Clothing for {{ skin_tone }} Skin Tone</h1>
+
+        {% if matching_shirts %}
+            <div class="recommendations-container" id="recommendations-container">
+                {% for shirt in matching_shirts %}
+                    <div class="shirt-card">
+                        <img src="{{ shirt.img_url }}" alt="Shirt Image">
+                        <p><a href="{{ shirt.product_url }}" target="_blank">View Product</a></p>
+                    </div>
+                {% endfor %}
+            </div>
+        {% else %}
+            <p>No recommendations found for the selected colors.</p>
+        {% endif %}
+
+        <!-- Button to go back to the home page -->
+        <a href="{{ url_for('home') }}">
+    <button class="button">Go Back</button>
+</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skin Tone and Outfit Matching System</title>
+    <style>
+        body {
+            background-color: rgb(26, 141, 142); /* Teal Blue */
+            color: black;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            flex-direction: column;
+        }
+        .title-box {
+            background-color: #FFF5E1; /* Cream color */
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .content-box {
+            text-align: center;
+            background-color: #F1E0C6; /* Darker cream color */
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+        }
+        .upload-box {
+            background-color: #FFF5E1; /* Cream color for the upload section */
+            padding: 20px;
+            border-radius: 10px;
+            width: 80%;
+            max-width: 800px;
+            margin-top: 30px;
+            text-align: center;
+        }
+        .heading {
+            font-size: 36px;
+            margin: 0;
+        }
+        .info-box {
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .button {
+            background-color: #FF6B6B;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .button:hover {
+            background-color: #E67E22;
+        }
+    </style>
+</head>
+<body>
+    <div class="title-box">
+        <h1 class="heading">Skin Tone and Outfit Matching System</h1>
+    </div>
+    <div class="content-box">
+        <div class="info-box">
+            <h2>Discover Your Perfect Match!</h2>
+            <p>At the Skin Tone and Outfit Matching System, we believe that fashion should celebrate individuality. Our platform provides personalized outfit recommendations tailored to complement your unique skin tone.</p>
+            <h2>Join Our Fashion Community!</h2>
+            <p>Fashion is not just about clothing; it’s about expressing who you are. Connect with fellow fashion enthusiasts, explore the latest trends, and embrace the beauty of diversity!</p>
+        </div>
+    </div>
+    <div class="upload-box">
+        <h2>Upload Your Image</h2>
+        <form action="/upload" method="POST" enctype="multipart/form-data">
+            <input type="file" name="image" accept="image/*" required>
+            <button type="submit" class="button">Upload and Detect Skin Tone</button>
+        </form>
+    </div>
+</body>
+</html>
